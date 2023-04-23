@@ -2,6 +2,7 @@ package org.example.guessing.desktop;
 
 import org.example.guessing.GuessingGame;
 import org.example.guessing.Node;
+import org.example.guessing.exception.ValueUniqueException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -82,6 +83,14 @@ public class MainDesktop {
         );
     }
 
+    private static void _showMessageDialog() {
+        showMessageDialog(null, "Você deve preencher o campo.", "Erro", INFORMATION_MESSAGE);
+    }
+
+    private static void _showMessageDialog(String message) {
+        showMessageDialog(null, message, "Erro", INFORMATION_MESSAGE);
+    }
+
     private static void ask(Node node) {
         boolean answeredYes = isAnsweredYes(node.getName());
         if (answeredYes) {
@@ -111,8 +120,27 @@ public class MainDesktop {
 
     private static void addNewNode(Node node) {
         String name = askNewNode();
+        if (name == null || name.isEmpty()) {
+            _showMessageDialog();
+            addNewNode(node);
+        } else {
+            askToComplete(node, name);
+        }
+    }
+
+    private static void askToComplete(Node node, String name) {
         String characteristic = complete(name, node.getName());
-        guessingGame.addNode(node, name, characteristic);
+        if (characteristic == null || characteristic.isEmpty()) {
+            _showMessageDialog();
+            askToComplete(node, name);
+        } else {
+            try {
+                guessingGame.addNode(node, name, characteristic);
+            } catch (ValueUniqueException e) {
+                _showMessageDialog(e.getMessage());
+                addNewNode(node);
+            }
+        }
     }
 
     private static GuessingGame buildGuessingGame() {

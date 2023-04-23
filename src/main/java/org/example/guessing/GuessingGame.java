@@ -1,14 +1,14 @@
 package org.example.guessing;
 
-import com.google.gson.Gson;
+import org.example.guessing.exception.ValueUniqueException;
 
 import java.util.logging.Logger;
+
+import static org.example.guessing.utils.GsonUtils.toJson;
 
 public class GuessingGame {
 
     private final static Logger logger = Logger.getLogger(GuessingGame.class.getName());
-
-    private static final Gson gson = new Gson();
 
     private final Node root;
 
@@ -22,25 +22,41 @@ public class GuessingGame {
         return current = root;
     }
 
-    public Node yes() {
+    public Node yes(){
+        if (current == null) {
+            return ok();
+        }
         return current = current.getNext();
     }
 
     public Node no() {
+        if (current == null) {
+            return ok();
+        }
         return current = current.getOther();
     }
 
-    public Node addNode(Node no, String name, String characteristic) {
+    public Node addNode(Node no, String name, String characteristic) throws ValueUniqueException {
+        validateUniqueName(name, characteristic);
         return root.findNodeByName(no.getName())
                 .map(baseNode -> updateNode(baseNode, buildCharacteristicNode(no, name, characteristic)))
                 .orElse(null);
+    }
+
+    private void validateUniqueName(String name, String characteristic) throws ValueUniqueException {
+        if (root.findNodeByName(name).isPresent()) {
+            throw new ValueUniqueException(name + " já existe, escolha outro nome");
+        }
+        if (root.findNodeByName(characteristic).isPresent()) {
+            throw new ValueUniqueException(characteristic + " já existe, escolha outro nome");
+        }
     }
 
     private Node updateNode(Node baseNode, Node characteristicNode) {
         baseNode.setName(characteristicNode.getName());
         baseNode.setNext(characteristicNode.getNext());
         baseNode.setOther(characteristicNode.getOther());
-        logger.info("Update Node " + gson.toJson(root));
+        logger.info("Update Node " + toJson(root));
         return baseNode;
     }
 

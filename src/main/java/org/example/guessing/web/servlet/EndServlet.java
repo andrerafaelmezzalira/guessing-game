@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static org.example.guessing.utils.ServletUtils.restart;
+
 public class EndServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		request.getSession().removeAttribute("node");
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		restart(request, response);
 	}
 
 }

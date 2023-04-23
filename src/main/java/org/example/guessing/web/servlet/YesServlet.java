@@ -7,22 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import org.example.guessing.GuessingGame;
 import org.example.guessing.Node;
+
+import static org.example.guessing.utils.ServletUtils.dispatcher;
+import static org.example.guessing.utils.ServletUtils.getGameGuessing;
 
 public class YesServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GuessingGame guessingGame = (GuessingGame) request.getSession().getServletContext().getAttribute("guessing");
+		GuessingGame guessingGame = getGameGuessing(request);
 		Node node = guessingGame.yes();
-		if (node == null) {
-			request.getRequestDispatcher("/end.jsp").forward(request, response);
-		} else {
-			String nodeJson = new Gson().toJson(node);
-			request.getSession().setAttribute("node", nodeJson);
-			request.getRequestDispatcher("/ask.jsp").forward(request, response);
-		}
+		dispatcher(request, response, node, "/end.jsp");
 	}
+
 }
