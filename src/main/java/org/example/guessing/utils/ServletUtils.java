@@ -16,12 +16,18 @@ public class ServletUtils {
         return (GuessingGame) request.getSession().getServletContext().getAttribute("guessing");
     }
 
-    public static void restart(HttpServletRequest request,
-                               HttpServletResponse response) throws ServletException, IOException {
+    public static void restartGuessingGame(HttpServletRequest request,
+                                           HttpServletResponse response) throws ServletException, IOException {
 
         request.getSession().removeAttribute("node");
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
+
+    public static void dispatcher(HttpServletRequest request, HttpServletResponse response, Node node)
+            throws ServletException, IOException {
+        dispatcher(request, response, node, null);
+    }
+
     public static void dispatcher(HttpServletRequest request, HttpServletResponse response, Node node, String dispatcher)
             throws ServletException, IOException {
         if (node == null) {

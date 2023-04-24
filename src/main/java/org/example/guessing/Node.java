@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.util.Optional;
 
+import static java.util.Optional.empty;
+
 @Builder
 @Getter
 @Setter
@@ -29,7 +31,7 @@ public class Node {
         if (other != null) {
             return other.findNodeByName(name);
         }
-        return Optional.empty();
+        return empty();
     }
 
     public static Node of(String root, String next, String other) {

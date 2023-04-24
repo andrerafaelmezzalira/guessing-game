@@ -11,17 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.example.guessing.GuessingGame;
 import org.example.guessing.Node;
-import org.example.guessing.utils.PropertyUtils;
 
+import static org.example.guessing.utils.PropertyUtils.readProperties;
 import static org.example.guessing.utils.ServletUtils.dispatcher;
 import static org.example.guessing.utils.ServletUtils.getGameGuessing;
 
 public class OkServlet extends HttpServlet {
 
-    private static final ResourceBundle resourceBundle = PropertyUtils.readProperties();
-
     @Override
     public void init(ServletConfig config) {
+        ResourceBundle resourceBundle = readProperties();
         String root = resourceBundle.getString("guessing.root");
         String next = resourceBundle.getString("guessing.next");
         String other = resourceBundle.getString("guessing.other");
@@ -32,6 +31,6 @@ public class OkServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GuessingGame guessingGame = getGameGuessing(request);
         Node node = guessingGame.ok();
-        dispatcher(request, response, node, null);
+        dispatcher(request, response, node);
     }
 }
