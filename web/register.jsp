@@ -37,10 +37,9 @@
 <script>
 
     function complete() {
-        var node = JSON.parse('${sessionScope.node}')
         var complete = '<%= resource.getString("guessing.complete") %>';
         document.getElementById('complete').innerHTML = "<div class=\"node\">"
-            + complete.replace('{0}', document.getElementById('_name').value).replace('{1}', node.name)
+            + complete.replace('{0}', document.getElementById('_name').value).replace('{1}', JSON.parse('${sessionScope.node}').name)
             + "</div><div class=\"node\"><input type=\"text\" id=\"_characteristic\" ></div>"
             + "<div class=\"node\"><button id=\"buttonCharacteristic\" disabled=\"disabled\" onclick=\"save()\">Ok</button></div>";
             document.getElementById('_characteristic').focus();

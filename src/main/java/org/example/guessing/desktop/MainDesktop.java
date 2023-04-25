@@ -3,7 +3,6 @@ package org.example.guessing.desktop;
 import org.example.guessing.GuessingGame;
 import org.example.guessing.Node;
 import org.example.guessing.exception.ValueUniqueException;
-import org.example.guessing.web.servlet.RegisterServlet;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,7 +23,7 @@ import static org.example.guessing.utils.PropertyUtils.readProperties;
 
 public class MainDesktop {
 
-    private final static Logger logger = getLogger(RegisterServlet.class.getName());
+    private final static Logger logger = getLogger(MainDesktop.class.getName());
 
     private static final ResourceBundle resourceBundle = readProperties();
 

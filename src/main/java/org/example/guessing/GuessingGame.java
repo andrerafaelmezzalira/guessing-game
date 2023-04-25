@@ -45,15 +45,16 @@ public class GuessingGame {
     }
 
     private void validateUniqueName(String name, String characteristic) throws ValueUniqueException {
+        throwValidateUniqueException(name);
+        throwValidateUniqueException(characteristic);
+    }
+
+    private void throwValidateUniqueException(String name) throws ValueUniqueException {
         String message = " já existe, escolha outro nome";
         if (root.findNodeByName(name).isPresent()) {
             throw new ValueUniqueException(name.concat(message));
         }
-        if (root.findNodeByName(characteristic).isPresent()) {
-            throw new ValueUniqueException(characteristic.concat(message));
-        }
     }
-
     private Node updateNode(Node baseNode, Node characteristicNode) {
         baseNode.setName(characteristicNode.getName());
         baseNode.setNext(characteristicNode.getNext());
@@ -63,15 +64,23 @@ public class GuessingGame {
     }
 
     private Node buildCharacteristicNode(Node node, String name, String characteristic) {
-        return Node.builder().name(characteristic).next(buildNextNode(name)).other(buildOtherNode(node)).build();
+        return Node.builder()
+                .name(characteristic)
+                .next(buildNextNode(name))
+                .other(buildOtherNode(node))
+                .build();
     }
 
     private Node buildOtherNode(Node node) {
-        return Node.builder().next(node.getNext()).name(node.getName()).build();
+        return Node.builder()
+                .next(node.getNext())
+                .name(node.getName())
+                .build();
     }
 
     private Node buildNextNode(String name) {
-        return Node.builder().name(name).build();
+        return Node.builder()
+                .name(name)
+                .build();
     }
-
  }
