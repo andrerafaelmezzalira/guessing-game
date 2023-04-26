@@ -107,11 +107,11 @@ public class AnimalsTest {
         yes();
         ask("tubarão?");
         no();
-        complete("Desisto, qual foi o animal que voce pensou?", "peixe", "inofenviso");
+        complete("Desisto, qual foi o animal que voce pensou?", "peixe", "inofensivo");
 
     }
 
-    private void complete(String message, String name, String characteristic) throws ValueUniqueException {
+    private void complete(@SuppressWarnings("SameParameterValue") String ignoredMessage, String name, String characteristic) throws ValueUniqueException {
         assertNull(node);
         node = guessingGame.addNode(previousNode, name, characteristic);
         assertEquals(characteristic, node.getName());
@@ -122,7 +122,7 @@ public class AnimalsTest {
         node = guessingGame.no();
     }
 
-    private void finish(String message) {
+    private void finish(@SuppressWarnings("SameParameterValue") String ignoredMessage) {
         assertNull(node);
     }
 
@@ -134,7 +134,7 @@ public class AnimalsTest {
         assertEquals(message, node.getName() + "?");
     }
 
-    private void ok(String message) {
+    private void ok(@SuppressWarnings("SameParameterValue") String ignoredMessage) {
         node = guessingGame.ok();
     }
 }
