@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class GourmetTest {
 
-    private static final GuessingGame game = new GuessingGame(Node.of("massa", "lasanha", "bolo de chocolate"));
+    private static final GuessingGame guessingGame = new GuessingGame(Node.of("massa", "lasanha", "bolo de chocolate"));
 
     @Test
     public void itShouldTesting28Scenario() throws ValueUniqueException {
@@ -23,11 +23,11 @@ public class GourmetTest {
           Acertei de novo!
          */
 
-        Node node = game.ok();
+        Node node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("lasanha", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -42,14 +42,14 @@ public class GourmetTest {
           panqueca gostoso mas lasanha nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("lasanha", node.getName());
-        Node nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "panqueca", "gostoso");
-        assertEquals("gostoso", nodeNull.getName());
+        Node otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "panqueca", "gostoso");
+        assertEquals("gostoso", otherNode.getName());
 
         /*
           Cenario 3
@@ -61,11 +61,11 @@ public class GourmetTest {
           Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("bolo de chocolate", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -80,14 +80,14 @@ public class GourmetTest {
           bolo de laranja é mais saudavel mas bolo de chocolate nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("bolo de chocolate", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "bolo de laranja", "Saudável");
-        assertEquals("Saudável", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "bolo de laranja", "Saudável");
+        assertEquals("Saudável", otherNode.getName());
 
         /*
           Cenario 5
@@ -101,13 +101,13 @@ public class GourmetTest {
           Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "panqueca");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
 
@@ -125,16 +125,16 @@ public class GourmetTest {
           macarronada é mais desconsertante mas panqueca nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("panqueca", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "macarronada", "desconsertante");
-        assertEquals("desconsertante", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "macarronada", "desconsertante");
+        assertEquals("desconsertante", otherNode.getName());
 
         /*
           Cenario 7
@@ -148,13 +148,13 @@ public class GourmetTest {
           Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals(node.getName(), "lasanha");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
 
@@ -170,13 +170,13 @@ public class GourmetTest {
           Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "bolo de laranja");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -193,16 +193,16 @@ public class GourmetTest {
          escondidinho de carne é mais rapido mas panqueca nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("lasanha", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "escondidinho de carne", "rapido");
-        assertEquals("rapido", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "escondidinho de carne", "rapido");
+        assertEquals("rapido", otherNode.getName());
 
         /*
           Cenario 10
@@ -218,16 +218,16 @@ public class GourmetTest {
           peixe é leve mas bolo de laranja nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("bolo de laranja", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "peixe", "leve");
-        assertEquals("leve", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "peixe", "leve");
+        assertEquals("leve", otherNode.getName());
 
 
         /*
@@ -242,13 +242,13 @@ public class GourmetTest {
           Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals(node.getName(), "bolo de chocolate");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -265,16 +265,16 @@ public class GourmetTest {
           costela assada é gorduroso mas bolo de chocolate nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("bolo de chocolate", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "costela assada", "gorduroso");
-        assertEquals("gorduroso", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "costela assada", "gorduroso");
+        assertEquals("gorduroso", otherNode.getName());
 
         /*
           Cenario 13
@@ -292,18 +292,18 @@ public class GourmetTest {
           pudim de leite é irresistivel mas bolo de chocolate nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("gorduroso", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("bolo de chocolate", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "pudim de leite", "irresistivel");
-        assertEquals("irresistivel", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "pudim de leite", "irresistivel");
+        assertEquals("irresistivel", otherNode.getName());
 
         /*
           Cenario 14
@@ -319,17 +319,17 @@ public class GourmetTest {
           Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals(node.getName(), "gorduroso");
-        node = game.no();
+        node = guessingGame.no();
         assertEquals(node.getName(), "irresistivel");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "pudim de leite");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
 
@@ -349,18 +349,18 @@ public class GourmetTest {
          picanha é mais crua mas costela assada nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("gorduroso", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("costela assada", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "picanha", "mais crua");
-        assertEquals("mais crua", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "picanha", "mais crua");
+        assertEquals("mais crua", otherNode.getName());
 
         /*
          Cenario 16
@@ -378,17 +378,17 @@ public class GourmetTest {
          Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals(node.getName(), "gorduroso");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "mais crua");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "picanha");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
 
@@ -409,18 +409,18 @@ public class GourmetTest {
          */
 
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("leve", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("bolo de laranja", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "tainha", "fora de serie");
-        assertEquals("fora de serie", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "tainha", "fora de serie");
+        assertEquals("fora de serie", otherNode.getName());
 
         /*
          Cenario 18
@@ -440,20 +440,20 @@ public class GourmetTest {
          salmao é mais saboroso mas tainha nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("leve", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("fora de serie", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("tainha", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "salmao", "saboroso");
-        assertEquals("saboroso", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "salmao", "saboroso");
+        assertEquals("saboroso", otherNode.getName());
 
         /*
          Cenario 19
@@ -471,18 +471,18 @@ public class GourmetTest {
          frango é mais cheiroso mas peixe nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("leve", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("peixe", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "frango", "cheiroso");
-        assertEquals("cheiroso", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "frango", "cheiroso");
+        assertEquals("cheiroso", otherNode.getName());
 
         /*
          Cenario 20
@@ -500,17 +500,17 @@ public class GourmetTest {
          Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("Saudável", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "leve");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "cheiroso");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "frango");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -529,18 +529,18 @@ public class GourmetTest {
          empadao é mais nutritivo mas lasanha nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("rapido", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("lasanha", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "empadao", "nutritivo");
-        assertEquals("nutritivo", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "empadao", "nutritivo");
+        assertEquals("nutritivo", otherNode.getName());
 
 
         /*
@@ -557,15 +557,15 @@ public class GourmetTest {
          Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "desconsertante");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "macarronada");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -586,20 +586,20 @@ public class GourmetTest {
          dobradinha é mais nojento mas empadao nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("rapido", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("nutritivo", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("empadao", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "dobradinha", "nojento");
-        assertEquals("nojento", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "dobradinha", "nojento");
+        assertEquals("nojento", otherNode.getName());
 
         /*
          Cenario 24
@@ -618,18 +618,18 @@ public class GourmetTest {
          */
 
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("desconsertante", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("macarronada", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "pastel", "banhento");
-        assertEquals("banhento", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "pastel", "banhento");
+        assertEquals("banhento", otherNode.getName());
 
 
         /*
@@ -648,18 +648,18 @@ public class GourmetTest {
          feijoada é mais pesado mas escondidinho de carne nao
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("rapido", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("escondidinho de carne", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "feijoada", "pesado");
-        assertEquals("pesado", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "feijoada", "pesado");
+        assertEquals("pesado", otherNode.getName());
 
 
         /*
@@ -676,15 +676,15 @@ public class GourmetTest {
          Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "desconsertante");
-        node = game.no();
+        node = guessingGame.no();
         assertEquals(node.getName(), "panqueca");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -703,17 +703,17 @@ public class GourmetTest {
          Acertei de novo!
          */
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals(node.getName(), "rapido");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "pesado");
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals(node.getName(), "feijoada");
-        node = game.yes();
+        node = guessingGame.yes();
         assertNull(node);
 
         /*
@@ -733,18 +733,18 @@ public class GourmetTest {
          */
 
 
-        node = game.ok();
+        node = guessingGame.ok();
         assertEquals("massa", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("gostoso", node.getName());
-        node = game.yes();
+        node = guessingGame.yes();
         assertEquals("desconsertante", node.getName());
-        node = game.no();
+        node = guessingGame.no();
         assertEquals("panqueca", node.getName());
-        nodeNull = game.no();
-        assertNull(nodeNull);
-        nodeNull = game.addNode(node, "cueca virada", "doce");
-        assertEquals("doce", nodeNull.getName());
+        otherNode = guessingGame.no();
+        assertNull(otherNode);
+        otherNode = guessingGame.addNode(node, "cueca virada", "doce");
+        assertEquals("doce", otherNode.getName());
 
     }
 }
