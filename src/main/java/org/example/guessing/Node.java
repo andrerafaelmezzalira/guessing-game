@@ -4,10 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Optional;
-
-import static java.util.Optional.empty;
-
 @Builder
 @Getter
 @Setter
@@ -18,21 +14,6 @@ public class Node {
     private Node next;
 
     private Node other;
-
-    public Optional<Node> findNodeByName(String name) {
-        if (name.equals(this.name)) {
-            return Optional.of(this);
-        } else if (next != null) {
-            Optional<Node> nextResult = next.findNodeByName(name);
-            if (nextResult.isPresent()) {
-                return nextResult;
-            }
-        }
-        if (other != null) {
-            return other.findNodeByName(name);
-        }
-        return empty();
-    }
 
     public static Node of(String root, String next, String other) {
         return Node.builder()

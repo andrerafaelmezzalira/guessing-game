@@ -7,19 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.example.guessing.GuessingGame;
 import org.example.guessing.Node;
 
 import static org.example.guessing.utils.ServletUtils.dispatcher;
-import static org.example.guessing.utils.ServletUtils.getGameGuessing;
+import static org.example.guessing.utils.ServletUtils.setSessionNodeObject;
+import static org.example.guessing.web.BuildGuessingGame.guessingGame;
 
 public class YesServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GuessingGame guessingGame = getGameGuessing(request);
 		Node node = guessingGame.yes();
+		setSessionNodeObject(request, node);
 		dispatcher(request, response, node, "/end.jsp");
 	}
-
 }

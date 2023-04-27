@@ -2,16 +2,13 @@ package org.example.guessing.desktop;
 
 import org.example.guessing.GuessingGame;
 import org.example.guessing.Node;
-import org.example.guessing.exception.ValueUniqueException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 import static java.text.MessageFormat.format;
-import static java.util.logging.Logger.getLogger;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
@@ -22,8 +19,6 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import static org.example.guessing.utils.PropertyUtils.readProperties;
 
 public class MainDesktop {
-
-    private final static Logger logger = getLogger(MainDesktop.class.getName());
 
     private static final ResourceBundle resourceBundle = readProperties();
 
@@ -91,10 +86,6 @@ public class MainDesktop {
         showMessageDialog(null, "Você deve preencher o campo.", "Erro", INFORMATION_MESSAGE);
     }
 
-    private static void _showMessageDialog(String message) {
-        showMessageDialog(null, message, "Erro", INFORMATION_MESSAGE);
-    }
-
     private static void ask(Node node) {
         boolean answeredYes = isAnsweredYes(node.getName());
         if (answeredYes) {
@@ -138,13 +129,7 @@ public class MainDesktop {
             _showMessageDialog();
             askToComplete(node, name);
         } else {
-            try {
-                guessingGame.addNode(node.getName(), name, characteristic);
-            } catch (ValueUniqueException e) {
-                logger.severe("Validate Unique Name " + e.getMessage());
-                _showMessageDialog(e.getMessage());
-                addNewNode(node);
-            }
+            guessingGame.addNode(node, name, characteristic);
         }
     }
 

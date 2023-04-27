@@ -9,14 +9,6 @@
 	</head>
 	<body>
 		<div class="content">
-            <div class="node">
-                <%
-                    String error = (String) session.getAttribute("error");
-                    if (error != null) {
-                        out.print(error);
-                    }
-                %>
-            </div>
 		    <div class="node">
                 <%= resource.getString("guessing.failure") %></br>
 		    </div>

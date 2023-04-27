@@ -1,6 +1,5 @@
 package org.example.guessing;
 
-import org.example.guessing.exception.ValueUniqueException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +13,7 @@ public class AnimalsTest {
     private Node previousNode;
 
     @Test
-    public void itShouldGuessNodeLevelOne() throws ValueUniqueException {
+    public void itShouldGuessNodeLevelOne() {
 
         /*
          Cenário 1
@@ -111,9 +110,9 @@ public class AnimalsTest {
 
     }
 
-    private void complete(@SuppressWarnings("SameParameterValue") String ignoredMessage, String name, String characteristic) throws ValueUniqueException {
+    private void complete(@SuppressWarnings("SameParameterValue") String ignoredMessage, String name, String characteristic) {
         assertNull(node);
-        node = guessingGame.addNode(previousNode.getName(), name, characteristic);
+        node = guessingGame.addNode(previousNode, name, characteristic);
         assertEquals(characteristic, node.getName());
     }
 

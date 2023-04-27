@@ -1,12 +1,10 @@
 package org.example.guessing;
 
-import org.example.guessing.exception.ValueUniqueException;
-
 import java.util.logging.Logger;
 
 import static java.util.logging.Logger.getLogger;
 import static org.example.guessing.Node.buildNode;
-import static org.example.guessing.utils.GsonUtils.toJson;
+import static org.example.guessing.utils.NodeToJsonUtils.toJson;
 
 public class GuessingGame {
 
@@ -38,22 +36,7 @@ public class GuessingGame {
         return current = current.getOther();
     }
 
-    public Node addNode(String otherName, String name, String characteristic) throws ValueUniqueException {
-        throwValidateUniqueException(name);
-        throwValidateUniqueException(characteristic);
-        return root.findNodeByName(otherName)
-                .map(otherNode -> updateNode(otherNode, name, characteristic))
-                .orElseThrow(() -> new ValueUniqueException("Ops, ocorreu algum problema"));
-    }
-
-    private void throwValidateUniqueException(String name) throws ValueUniqueException {
-        String message = " já existe, escolha outro nome";
-        if (root.findNodeByName(name).isPresent()) {
-            throw new ValueUniqueException(name.concat(message));
-        }
-    }
-
-    private Node updateNode(Node otherNode, String name, String characteristic) {
+    public Node addNode(Node otherNode, String name, String characteristic) {
         otherNode.setNext(buildNode(name));
         otherNode.setOther(buildNode(otherNode.getName()));
         otherNode.setName(characteristic);

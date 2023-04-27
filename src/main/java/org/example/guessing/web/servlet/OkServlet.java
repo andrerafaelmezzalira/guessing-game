@@ -14,7 +14,7 @@ import org.example.guessing.Node;
 
 import static org.example.guessing.utils.PropertyUtils.readProperties;
 import static org.example.guessing.utils.ServletUtils.dispatcher;
-import static org.example.guessing.utils.ServletUtils.getGameGuessing;
+import static org.example.guessing.web.BuildGuessingGame.guessingGame;
 
 public class OkServlet extends HttpServlet {
 
@@ -24,12 +24,11 @@ public class OkServlet extends HttpServlet {
         String root = resourceBundle.getString("guessing.root");
         String next = resourceBundle.getString("guessing.next");
         String other = resourceBundle.getString("guessing.other");
-        config.getServletContext().setAttribute("guessing", new GuessingGame(Node.of(root, next, other)));
+        guessingGame = new GuessingGame(Node.of(root, next, other));
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        GuessingGame guessingGame = getGameGuessing(request);
         Node node = guessingGame.ok();
         dispatcher(request, response, node);
     }

@@ -1,11 +1,8 @@
 package org.example.guessing;
 
-import org.example.guessing.exception.ValueUniqueException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GuessingGameTest {
 
@@ -52,53 +49,21 @@ public class GuessingGameTest {
     }
 
     @Test
-    public void itShouldReturnValueUniqueExceptionWhenNameExistInCallAddNodeMethod() {
-        Node root = Node.of("root", "next", "other");
-        GuessingGame guessingGame = new GuessingGame(root);
-        Exception exception = assertThrows(ValueUniqueException.class,
-                () -> guessingGame.addNode(
-                        "name",
-                        "next",
-                        "characteristic"));
-        assertTrue(exception.getMessage().contains("next já existe, escolha outro nome"));
-    }
-
-    @Test
-    public void itShouldReturnValueUniqueExceptionWhenCharacteristicExistInCallAddNodeMethod() {
-        Node root = Node.of("root", "next", "other");
-        GuessingGame guessingGame = new GuessingGame(root);
-        Exception exception = assertThrows(ValueUniqueException.class,
-                () -> guessingGame.addNode(
-                        "previous name",
-                        "name",
-                        "other"));
-        assertTrue(exception.getMessage().contains("other já existe, escolha outro nome"));
-    }
-
-    @Test
-    public void itShouldReturnValueUniqueExceptionWhenCantFinedAnyNamesInCallAddNodeMethod() {
-        Node root = Node.of("root", "next", "other");
-        GuessingGame guessingGame = new GuessingGame(root);
-        Exception exception = assertThrows(ValueUniqueException.class,
-                () -> guessingGame.addNode(
-                        "name not found",
-                        "name",
-                        "characteristic"));
-        assertTrue(exception.getMessage().contains("Ops, ocorreu algum problema"));
-    }
-
-    @Test
-    public void itShouldReturnNodeAddedWhenCallAddNodeMethod() throws ValueUniqueException {
+    public void itShouldReturnNodeAddedWhenCallAddNodeMethod() {
         Node root = Node.of("root", "next", "other");
         GuessingGame guessingGame = new GuessingGame(root);
         Node nodeAdded = guessingGame.addNode(
-                "other",
+                Node.builder()
+                        .name("other")
+                        .build(),
                 "name",
                 "characteristic");
         assertEquals(nodeAdded.getName(), "characteristic");
 
         nodeAdded = guessingGame.addNode(
-                "next",
+                Node.builder()
+                        .name("next")
+                        .build(),
                 "other name",
                 "other characteristic");
         assertEquals(nodeAdded.getName(), "other characteristic");
