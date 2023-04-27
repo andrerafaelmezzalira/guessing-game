@@ -14,7 +14,8 @@ import static org.example.guessing.utils.GuessingGameUtils.getGuessingGame;
 public class RegisterServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         createNode(request);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }

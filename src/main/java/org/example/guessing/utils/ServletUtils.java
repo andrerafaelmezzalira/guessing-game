@@ -21,15 +21,10 @@ public class ServletUtils {
         if (node == null) {
             request.getRequestDispatcher(dispatcher).forward(request, response);
         } else {
+            request.getSession().setAttribute("nodeObject", node);
             String json = toJson(node);
             request.getSession().setAttribute("node", json);
             request.getRequestDispatcher("/ask.jsp").forward(request, response);
-        }
-    }
-
-    public static void setSessionNodeObject(HttpServletRequest request, Node node) {
-        if (node != null) {
-            request.getSession().setAttribute("nodeObject", node);
         }
     }
 }
