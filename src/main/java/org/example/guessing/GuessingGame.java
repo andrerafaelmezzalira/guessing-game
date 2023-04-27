@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import static java.util.logging.Logger.getLogger;
 import static org.example.guessing.Node.buildNode;
-import static org.example.guessing.utils.NodeToJsonUtils.toJson;
+import static org.example.guessing.utils.GsonUtils.toJson;
 
 public class GuessingGame {
 

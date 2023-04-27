@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.example.guessing.Node;
 
-import static org.example.guessing.web.BuildGuessingGame.guessingGame;
+import static org.example.guessing.utils.GuessingGameUtils.getGuessingGame;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -23,6 +23,6 @@ public class RegisterServlet extends HttpServlet {
         Node node = (Node) request.getSession().getAttribute("nodeObject");
         String characteristic = request.getParameter("characteristic");
         String name = request.getParameter("name");
-        guessingGame.addNode(node, name, characteristic);
+        getGuessingGame().addNode(node, name, characteristic);
     }
 }

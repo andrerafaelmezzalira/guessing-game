@@ -11,13 +11,13 @@ import org.example.guessing.Node;
 
 import static org.example.guessing.utils.ServletUtils.dispatcher;
 import static org.example.guessing.utils.ServletUtils.setSessionNodeObject;
-import static org.example.guessing.web.BuildGuessingGame.guessingGame;
+import static org.example.guessing.utils.GuessingGameUtils.getGuessingGame;
 
 public class NoServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Node node = guessingGame.no();
+		Node node = getGuessingGame().no();
 		setSessionNodeObject(request, node);
 		dispatcher(request, response, node, "/register.jsp");
 	}
