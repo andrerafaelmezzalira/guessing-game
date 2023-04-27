@@ -19,23 +19,31 @@ import static org.example.guessing.utils.ServletUtils.restartGuessingGame;
 
 public class RegisterServlet extends HttpServlet {
 
-	private final static Logger logger = getLogger(RegisterServlet.class.getName());
+    private final static Logger logger = getLogger(RegisterServlet.class.getName());
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GuessingGame guessingGame = getGameGuessing(request);
-		String json = (String) request.getSession().getAttribute("node");
-		Node node = fromJson(json);
-		String characteristic = request.getParameter("characteristic");
-		String name = request.getParameter("name");
-		try {
-			guessingGame.addNode(node, name, characteristic);
-			restartGuessingGame(request, response);
-		} catch (ValueUniqueException e) {
-			logger.severe("Validate Unique Name " + e.getMessage());
-			request.getSession().setAttribute("error", e.getMessage());
-			request.getSession().setAttribute("node", json);
-			request.getRequestDispatcher("/register.jsp").forward(request, response);
-		}
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        GuessingGame guessingGame = getGameGuessing(request);
+        String json = (String) request.getSession().getAttribute("node");
+        Node node = fromJson(json);
+        String characteristic = request.getParameter("characteristic");
+        String name = request.getParameter("name");
+        try {
+            guessingGame.addNode(node.getName(), name, characteristic);
+            restartGuessingGame(request, response);
+        } catch (ValueUniqueException e) {
+            catchValueUniqueException(request, response, json, e);
+        }
+    }
+
+    private void catchValueUniqueException(HttpServletRequest request,
+                                           HttpServletResponse response,
+                                           String json,
+                                           ValueUniqueException e)
+            throws ServletException, IOException {
+        logger.severe("Validate Unique Name " + e.getMessage());
+        request.getSession().setAttribute("error", e.getMessage());
+        request.getSession().setAttribute("node", json);
+        request.getRequestDispatcher("/register.jsp").forward(request, response);
+    }
 }

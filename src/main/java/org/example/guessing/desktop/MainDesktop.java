@@ -139,7 +139,7 @@ public class MainDesktop {
             askToComplete(node, name);
         } else {
             try {
-                guessingGame.addNode(node, name, characteristic);
+                guessingGame.addNode(node.getName(), name, characteristic);
             } catch (ValueUniqueException e) {
                 logger.severe("Validate Unique Name " + e.getMessage());
                 _showMessageDialog(e.getMessage());

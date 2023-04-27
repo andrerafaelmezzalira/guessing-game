@@ -35,14 +35,15 @@ public class Node {
     }
 
     public static Node of(String root, String next, String other) {
-        return Node.builder().name(root).next(buildNext(next)).other(buildOther(other)).build();
+        return Node.builder()
+                .name(root)
+                .next(buildNode(next))
+                .other(buildNode(other))
+                .build();
     }
-
-    private static Node buildNext(String next) {
-        return Node.builder().name(next).build();
-    }
-
-    private static Node buildOther(String other) {
-        return Node.builder().name(other).build();
+    public static Node buildNode(String name) {
+        return Node.builder()
+                .name(name)
+                .build();
     }
 }

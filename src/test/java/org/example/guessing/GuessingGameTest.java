@@ -57,8 +57,7 @@ public class GuessingGameTest {
         GuessingGame guessingGame = new GuessingGame(root);
         Exception exception = assertThrows(ValueUniqueException.class,
                 () -> guessingGame.addNode(
-                        Node.builder()
-                                .build(),
+                        "name",
                         "next",
                         "characteristic"));
         assertTrue(exception.getMessage().contains("next já existe, escolha outro nome"));
@@ -70,8 +69,7 @@ public class GuessingGameTest {
         GuessingGame guessingGame = new GuessingGame(root);
         Exception exception = assertThrows(ValueUniqueException.class,
                 () -> guessingGame.addNode(
-                        Node.builder()
-                                .build(),
+                        "previous name",
                         "name",
                         "other"));
         assertTrue(exception.getMessage().contains("other já existe, escolha outro nome"));
@@ -83,9 +81,7 @@ public class GuessingGameTest {
         GuessingGame guessingGame = new GuessingGame(root);
         Exception exception = assertThrows(ValueUniqueException.class,
                 () -> guessingGame.addNode(
-                        Node.builder()
-                                .name("name not found")
-                                .build(),
+                        "name not found",
                         "name",
                         "characteristic"));
         assertTrue(exception.getMessage().contains("Ops, ocorreu algum problema"));
@@ -96,17 +92,13 @@ public class GuessingGameTest {
         Node root = Node.of("root", "next", "other");
         GuessingGame guessingGame = new GuessingGame(root);
         Node nodeAdded = guessingGame.addNode(
-                Node.builder()
-                        .name("other")
-                        .build(),
+                "other",
                 "name",
                 "characteristic");
         assertEquals(nodeAdded.getName(), "characteristic");
 
         nodeAdded = guessingGame.addNode(
-                Node.builder()
-                        .name("next")
-                        .build(),
+                "next",
                 "other name",
                 "other characteristic");
         assertEquals(nodeAdded.getName(), "other characteristic");

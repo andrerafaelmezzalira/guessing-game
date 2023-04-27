@@ -5,6 +5,7 @@ import org.example.guessing.exception.ValueUniqueException;
 import java.util.logging.Logger;
 
 import static java.util.logging.Logger.getLogger;
+import static org.example.guessing.Node.buildNode;
 import static org.example.guessing.utils.GsonUtils.toJson;
 
 public class GuessingGame {
@@ -23,7 +24,7 @@ public class GuessingGame {
         return current = root;
     }
 
-    public Node yes(){
+    public Node yes() {
         if (current == null) {
             return ok();
         }
@@ -37,16 +38,12 @@ public class GuessingGame {
         return current = current.getOther();
     }
 
-    public Node addNode(Node no, String name, String characteristic) throws ValueUniqueException {
-        validateUniqueName(name, characteristic);
-        return root.findNodeByName(no.getName())
-                .map(baseNode -> updateNode(baseNode, buildCharacteristicNode(no, name, characteristic)))
-                .orElseThrow(() -> new ValueUniqueException("Ops, ocorreu algum problema"));
-    }
-
-    private void validateUniqueName(String name, String characteristic) throws ValueUniqueException {
+    public Node addNode(String otherName, String name, String characteristic) throws ValueUniqueException {
         throwValidateUniqueException(name);
         throwValidateUniqueException(characteristic);
+        return root.findNodeByName(otherName)
+                .map(otherNode -> updateNode(otherNode, name, characteristic))
+                .orElseThrow(() -> new ValueUniqueException("Ops, ocorreu algum problema"));
     }
 
     private void throwValidateUniqueException(String name) throws ValueUniqueException {
@@ -55,32 +52,12 @@ public class GuessingGame {
             throw new ValueUniqueException(name.concat(message));
         }
     }
-    private Node updateNode(Node baseNode, Node characteristicNode) {
-        baseNode.setName(characteristicNode.getName());
-        baseNode.setNext(characteristicNode.getNext());
-        baseNode.setOther(characteristicNode.getOther());
+
+    private Node updateNode(Node otherNode, String name, String characteristic) {
+        otherNode.setNext(buildNode(name));
+        otherNode.setOther(buildNode(otherNode.getName()));
+        otherNode.setName(characteristic);
         logger.info("Update Node " + toJson(root));
-        return baseNode;
+        return otherNode;
     }
-
-    private Node buildCharacteristicNode(Node node, String name, String characteristic) {
-        return Node.builder()
-                .name(characteristic)
-                .next(buildNextNode(name))
-                .other(buildOtherNode(node))
-                .build();
-    }
-
-    private Node buildOtherNode(Node node) {
-        return Node.builder()
-                .next(node.getNext())
-                .name(node.getName())
-                .build();
-    }
-
-    private Node buildNextNode(String name) {
-        return Node.builder()
-                .name(name)
-                .build();
-    }
- }
+}

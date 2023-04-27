@@ -66,8 +66,8 @@ public class AnimalsTest {
         ask("vive na água?");
         no();
         ask("macaco?");
-        no();
-        complete("Desisto, qual foi o animal que voce pensou?", "leao", "ruje");
+        no("Desisto, qual foi o animal que voce pensou?");
+        complete("Complete, {0} __________ mas {1} não", "leao", "ruje");
 
         /*
          Cenário 4
@@ -99,28 +99,33 @@ public class AnimalsTest {
          nao
          Desisto, qual foi o animal que voce pensou?
          leao
-         Complete. leao ruje mas macaco nao
+         Complete. peixe inofensivo mas tubarão nao
          */
 
         ok("pense em um animal");
         ask("vive na água?");
         yes();
         ask("tubarão?");
-        no();
-        complete("Desisto, qual foi o animal que voce pensou?", "peixe", "inofensivo");
+        no("Desisto, qual foi o animal que voce pensou?");
+        complete("Complete, {0} __________ mas {1} não", "peixe", "inofensivo");
 
     }
 
     private void complete(@SuppressWarnings("SameParameterValue") String ignoredMessage, String name, String characteristic) throws ValueUniqueException {
         assertNull(node);
-        node = guessingGame.addNode(previousNode, name, characteristic);
+        node = guessingGame.addNode(previousNode.getName(), name, characteristic);
         assertEquals(characteristic, node.getName());
+    }
+
+    private void no(@SuppressWarnings("SameParameterValue") String ignoredMessage) {
+        no();
     }
 
     private void no() {
         previousNode = node;
         node = guessingGame.no();
     }
+
 
     private void finish(@SuppressWarnings("SameParameterValue") String ignoredMessage) {
         assertNull(node);

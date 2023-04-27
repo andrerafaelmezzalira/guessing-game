@@ -48,7 +48,7 @@ public class GourmetTest {
         assertEquals("lasanha", node.getName());
         Node otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "panqueca", "gostoso");
+        otherNode = guessingGame.addNode(node.getName(), "panqueca", "gostoso");
         assertEquals("gostoso", otherNode.getName());
 
         /*
@@ -86,7 +86,7 @@ public class GourmetTest {
         assertEquals("bolo de chocolate", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "bolo de laranja", "Saudável");
+        otherNode = guessingGame.addNode(node.getName(), "bolo de laranja", "Saudável");
         assertEquals("Saudável", otherNode.getName());
 
         /*
@@ -133,7 +133,7 @@ public class GourmetTest {
         assertEquals("panqueca", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "macarronada", "desconsertante");
+        otherNode = guessingGame.addNode(node.getName(), "macarronada", "desconsertante");
         assertEquals("desconsertante", otherNode.getName());
 
         /*
@@ -201,7 +201,7 @@ public class GourmetTest {
         assertEquals("lasanha", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "escondidinho de carne", "rapido");
+        otherNode = guessingGame.addNode(node.getName(), "escondidinho de carne", "rapido");
         assertEquals("rapido", otherNode.getName());
 
         /*
@@ -226,7 +226,7 @@ public class GourmetTest {
         assertEquals("bolo de laranja", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "peixe", "leve");
+        otherNode = guessingGame.addNode(node.getName(), "peixe", "leve");
         assertEquals("leve", otherNode.getName());
 
 
@@ -273,7 +273,7 @@ public class GourmetTest {
         assertEquals("bolo de chocolate", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "costela assada", "gorduroso");
+        otherNode = guessingGame.addNode(node.getName(), "costela assada", "gorduroso");
         assertEquals("gorduroso", otherNode.getName());
 
         /*
@@ -302,7 +302,7 @@ public class GourmetTest {
         assertEquals("bolo de chocolate", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "pudim de leite", "irresistivel");
+        otherNode = guessingGame.addNode(node.getName(), "pudim de leite", "irresistivel");
         assertEquals("irresistivel", otherNode.getName());
 
         /*
@@ -359,7 +359,7 @@ public class GourmetTest {
         assertEquals("costela assada", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "picanha", "mais crua");
+        otherNode = guessingGame.addNode(node.getName(), "picanha", "mais crua");
         assertEquals("mais crua", otherNode.getName());
 
         /*
@@ -419,7 +419,7 @@ public class GourmetTest {
         assertEquals("bolo de laranja", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "tainha", "fora de serie");
+        otherNode = guessingGame.addNode(node.getName(), "tainha", "fora de serie");
         assertEquals("fora de serie", otherNode.getName());
 
         /*
@@ -452,7 +452,7 @@ public class GourmetTest {
         assertEquals("tainha", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "salmao", "saboroso");
+        otherNode = guessingGame.addNode(node.getName(), "salmao", "saboroso");
         assertEquals("saboroso", otherNode.getName());
 
         /*
@@ -481,7 +481,7 @@ public class GourmetTest {
         assertEquals("peixe", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "frango", "cheiroso");
+        otherNode = guessingGame.addNode(node.getName(), "frango", "cheiroso");
         assertEquals("cheiroso", otherNode.getName());
 
         /*
@@ -539,7 +539,7 @@ public class GourmetTest {
         assertEquals("lasanha", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "empadao", "nutritivo");
+        otherNode = guessingGame.addNode(node.getName(), "empadao", "nutritivo");
         assertEquals("nutritivo", otherNode.getName());
 
 
@@ -598,7 +598,7 @@ public class GourmetTest {
         assertEquals("empadao", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "dobradinha", "nojento");
+        otherNode = guessingGame.addNode(node.getName(), "dobradinha", "nojento");
         assertEquals("nojento", otherNode.getName());
 
         /*
@@ -628,7 +628,7 @@ public class GourmetTest {
         assertEquals("macarronada", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "pastel", "banhento");
+        otherNode = guessingGame.addNode(node.getName(), "pastel", "banhento");
         assertEquals("banhento", otherNode.getName());
 
 
@@ -658,7 +658,7 @@ public class GourmetTest {
         assertEquals("escondidinho de carne", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "feijoada", "pesado");
+        otherNode = guessingGame.addNode(node.getName(), "feijoada", "pesado");
         assertEquals("pesado", otherNode.getName());
 
 
@@ -743,7 +743,7 @@ public class GourmetTest {
         assertEquals("panqueca", node.getName());
         otherNode = guessingGame.no();
         assertNull(otherNode);
-        otherNode = guessingGame.addNode(node, "cueca virada", "doce");
+        otherNode = guessingGame.addNode(node.getName(), "cueca virada", "doce");
         assertEquals("doce", otherNode.getName());
 
     }
